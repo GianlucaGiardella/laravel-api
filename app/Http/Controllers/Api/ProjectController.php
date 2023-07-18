@@ -8,17 +8,35 @@ use App\Http\Controllers\Controller;
 
 class ProjectController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::with('type', 'technologies')->paginate(10);
+        $searchString = $request->query('q', '');
 
-        return response()->json($projects);
+        $projects = Project::with('type', 'technologies')->where('title', 'LIKE', "%{$searchString}%")->paginate(8);
+
+        return response()->json([
+            'success'   => true,
+            'results'   => $projects,
+        ]);
     }
 
     public function show($slug)
     {
-        $project = Project::where('slug', $slug)->firstOrFail();
+        $project = Project::where('slug', $slug)->first();
 
-        return response()->json($project);
+        return response()->json([
+            'success'   => $project ? true : false,
+            'results'   => $project,
+        ]);
+    }
+
+    public function random()
+    {
+        $projects = Project::inRandomOrder()->limit(9)->get();
+
+        return response()->json([
+            'success'   => true,
+            'results'   => $projects,
+        ]);
     }
 }
