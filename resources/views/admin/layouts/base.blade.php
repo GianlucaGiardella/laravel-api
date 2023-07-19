@@ -9,7 +9,7 @@
     @vite('resources/js/app.js')
 </head>
 
-<body data-bs-theme="dark" style="background-image: linear-gradient(to right, #8e2de2, #4a00e0);">
+<body data-bs-theme="dark" class="bg-body-tertiary">
     @include('admin.includes.header')
     <main class="container px-5">
         @yield('contents')

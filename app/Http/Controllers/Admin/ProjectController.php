@@ -51,7 +51,7 @@ class ProjectController extends Controller
 
         $data = $request->all();
 
-        $imagePath = Storage::put('uploads', $data['image']);
+        $imagePath = Storage::put('uploads', 'image');
 
         $newProject = new Project();
         $newProject->title          = $data['title'];
@@ -93,8 +93,8 @@ class ProjectController extends Controller
 
         $data = $request->all();
 
-        if ($data['image']) {
-            $imagePath = Storage::put('uploads', $data['image']);
+        if ('image') {
+            $imagePath = Storage::put('uploads', 'image');
 
             if ($project->image) {
                 Storage::delete($project->image);

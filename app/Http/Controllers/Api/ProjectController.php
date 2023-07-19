@@ -12,7 +12,7 @@ class ProjectController extends Controller
     {
         $searchString = $request->query('q', '');
 
-        $projects = Project::with('type', 'technologies')->where('title', 'LIKE', "%{$searchString}%")->paginate(8);
+        $projects = Project::with('type', 'technologies')->where('title', 'LIKE', "%${searchString}%")->paginate(8);
 
         return response()->json([
             'success'   => true,

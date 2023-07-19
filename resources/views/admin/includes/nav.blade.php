@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-lg bg-body">
     <div class="container">
         <a class="navbar-brand text-gradient" href="{{ route('guests.home') }}">
-            <strong>Boolfolio</strong>
+            <strong>BoolFolio</strong>
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
