@@ -26,25 +26,29 @@ class LeadController extends Controller
         $validator = Validator::make($data, $this->validations);
 
         if ($validator->fails()) {
-            return response()->json([
-                'success'   => false,
-                'errors'    => $validator->errors(),
-            ]);
+            return response()
+                ->json([
+                    'success'   => false,
+                    'errors'    => $validator->errors(),
+                ]);
         }
 
         $newLead = new Lead();
-        $newLead->name              = $data['name'];
-        $newLead->email             = $data['email'];
-        $newLead->message           = $data['message'];
-        $newLead->newsletter        = $data['newsletter'];
+        $newLead->name          = $data['name'];
+        $newLead->email         = $data['email'];
+        $newLead->message       = $data['message'];
+        $newLead->newsletter    = $data['newsletter'];
         $newLead->save();
 
-        Mail::to($newLead->email)->send(new MailToLead($newLead));
+        Mail::to($newLead->email)
+            ->send(new MailToLead($newLead));
 
-        Mail::to('admin@boolfolio.com')->send(new MailToAdmin($newLead));
+        Mail::to('admin@boolfolio.com')
+            ->send(new MailToAdmin($newLead));
 
-        return response()->json([
-            'success' => true,
-        ]);
+        return response()
+            ->json([
+                'success' => true,
+            ]);
     }
 }
