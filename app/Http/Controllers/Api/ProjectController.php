@@ -10,33 +10,43 @@ class ProjectController extends Controller
 {
     public function index(Request $request)
     {
-        $searchString = $request->query('q', '');
+        $searchString = $request->query('q');
+        $projectType = $request->query('t', '');
 
-        $projects = Project::with('type', 'technologies')->where('title', 'LIKE', "%${searchString}%")->paginate(8);
+        $projects = Project::with('type', 'technologies')
+            ->where('title', 'LIKE', "%{$searchString}%")
+            ->where('type_id', $projectType)
+            ->paginate(8);
 
-        return response()->json([
-            'success'   => true,
-            'results'   => $projects,
-        ]);
+        return response()
+            ->json([
+                'success'   => true,
+                'results'   => $projects,
+            ]);
     }
 
     public function show($slug)
     {
-        $project = Project::where('slug', $slug)->first();
+        $project = Project::where('slug', $slug)
+            ->first();
 
-        return response()->json([
-            'success'   => $project ? true : false,
-            'results'   => $project,
-        ]);
+        return response()
+            ->json([
+                'success'   => $project ? true : false,
+                'results'   => $project,
+            ]);
     }
 
     public function random()
     {
-        $projects = Project::inRandomOrder()->limit(9)->get();
+        $projects = Project::inRandomOrder()
+            ->limit(9)
+            ->get();
 
-        return response()->json([
-            'success'   => true,
-            'results'   => $projects,
-        ]);
+        return response()
+            ->json([
+                'success'   => true,
+                'results'   => $projects,
+            ]);
     }
 }
