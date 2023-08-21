@@ -11,12 +11,19 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $searchString = $request->query('q');
-        $projectType = $request->query('t', '');
+        $typeId = $request->query('t');
 
-        $projects = Project::with('type', 'technologies')
-            ->where('title', 'LIKE', "%{$searchString}%")
-            ->where('type_id', $projectType)
-            ->paginate(8);
+        $query = Project::with('type', 'technologies');
+
+        if ($searchString) {
+            $query = $query->where('title', 'LIKE', "%{$searchString}%");
+        }
+
+        if ($typeId) {
+            $query = $query->where('type_id', $typeId);
+        }
+
+        $projects = $query->paginate(8);
 
         return response()
             ->json([
