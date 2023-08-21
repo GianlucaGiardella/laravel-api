@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Type;
+use App\Models\User;
 use App\Models\Project;
 use App\Models\Technology;
 use Illuminate\Support\Str;
@@ -14,6 +15,7 @@ class ProjectsTableSeeder extends Seeder
 {
     public function run(Faker $faker)
     {
+        $users = User::all();
         $types = Type::all()->except(1);
         $technolgies = Technology::all()->pluck('id');
 
@@ -23,6 +25,7 @@ class ProjectsTableSeeder extends Seeder
             $imageIndex = rand(0, 9);
 
             $project = Project::create([
+                'user_id'       => $faker->randomElement($users)->id,
                 'type_id'       => $faker->randomElement($types)->id,
                 'title'         => Str::ucfirst($title),
                 'author'        => 'Gianluca Giardella',

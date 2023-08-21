@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Type;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -40,5 +41,10 @@ class Project extends Model
     public function getRouteKey()
     {
         return $this->slug;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
