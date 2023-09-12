@@ -105,15 +105,15 @@ class ProjectController extends Controller
 
         $data = $request->all();
 
-        if ($data['image']) {
-            $imagePath = Storage::put('uploads', $data['image']);
+        // if ($data['image']) {
+        //     $imagePath = Storage::put('uploads', $data['image']);
 
-            if ($project->image) {
-                Storage::delete($project->image);
-            }
+        //     if ($project->image) {
+        //         Storage::delete($project->image);
+        //     }
 
-            $project->image = $imagePath;
-        }
+        //     $project->image = $imagePath;
+        // }
 
         $project->title             = $data['title'];
         $project->type_id           = $data['type_id'];

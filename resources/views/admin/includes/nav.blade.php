@@ -47,27 +47,28 @@
                     </ul>
                 </li>
             </ul>
+
+
+            <div class="navbar-nav mb-2 mb-lg-0">
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ $user->name }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item text-white" href="{{ route('admin.profile.edit') }}">Edit
+                                Profile</a>
+                        </li>
+
+                        <li>
+                            <form action="{{ route('logout') }}" method="post" class="dropdown-item">
+                                @csrf
+                                <button class="btn p-0 text-danger">Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-
-        <ul class="navbar-nav mb-2 mb-lg-0">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    {{ $user->name }}
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item text-white" href="{{ route('admin.profile.edit') }}">Edit Profile</a>
-                    </li>
-
-                    <li>
-                        <form action="{{ route('logout') }}" method="post" class="dropdown-item">
-                            @csrf
-                            <button class="btn p-0 text-danger">Logout</button>
-                        </form>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-
     </div>
 </nav>

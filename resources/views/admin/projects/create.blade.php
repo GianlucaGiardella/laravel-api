@@ -8,7 +8,6 @@
                 <hr class="rounded">
             </div>
 
-
             <form method="post" action="{{ route('admin.projects.store') }}" enctype="multipart/form-data" novalidate>
                 @csrf
 

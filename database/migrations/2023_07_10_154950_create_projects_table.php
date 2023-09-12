@@ -13,9 +13,9 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
 
             $table->string('title', 100);
+            $table->string('slug', 100)->unique();
             $table->string('author', 100);
             $table->string('image', 400)->nullable();
-            $table->string('slug', 100)->unique();
             $table->string('github_url', 400);
             $table->text('description');
 
